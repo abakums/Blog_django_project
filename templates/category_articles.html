@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{ category }}{% endblock %}
+{% block content %}
+    <div class="container-fluid mt-5">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">{{ category }}</h1>
+                <p class="lead">На данной странице вы можете увидеть все статьи в катаегории <i><b>{{ category }}</b></i>, которые есть в данном блоге</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+            {% for article in articles %}
+                <h3> {{ article.title }} </h3>
+                <h4> Категория: {{ article.category }} </h4>
+                <h5> Дата публикации: {{ article.publication_date }} </h5>
+                <h5> {{ article.content|truncatechars:150 }}
+                    <a href="{% url 'show_article' article.id %}#">Читать продолжение</a>
+                </h5>
+                <br><hr>
+            {% endfor %}
+    </div>
+{% endblock %}
